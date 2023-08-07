@@ -1,0 +1,61 @@
+#whatsapp{
+    width: 50px;
+    position: fixed;
+    z-index: 5;
+    bottom: 50px;
+    right: 20px;
+  }
+
+#nav{
+    padding-top: 30px;
+}
+
+.nav-link{
+    color: #bc01be;
+}
+
+.nav-link:hover{
+    color: #00bef2;
+}
+
+.acti{
+    color: #00bef2;
+}
+
+#redes{
+    font-size: 30px;
+    text-align: left;
+    padding-top: 30px;
+    text-align: center;
+}
+
+#redes a{
+    color: white;
+    font-size: 30px;
+    margin-right: 5px;    
+}
+
+#redes a #num{
+    background-color: brown;
+    font-size: 12px;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+/* #redes span{
+    margin-right: 5px;
+    color: #bc01be;
+}
+#redes span:hover{
+    margin-right: 5px;
+    color: #00bef2;
+} */
+
+#email{
+    padding-top: 30px;
+    color: #bc01be;
+    padding-left: 40px;
+}
+hr{
+    border-color: #00bef2;
+}

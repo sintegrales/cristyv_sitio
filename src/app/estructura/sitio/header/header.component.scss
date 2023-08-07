@@ -1,0 +1,53 @@
+#promo{
+    margin-bottom: 20px;
+}
+
+#ppromo{
+    width: 19%;
+    float: left;
+    margin-right: 5px;
+}
+
+hr{
+    clear: both;
+    margin-top: 50px;
+}
+
+#p{
+    margin-top: 10px;
+}
+
+#datos{
+    background-color: rgba(197,36,199,0.7);
+    color: white;
+    position: absolute;
+    z-index: 3;
+    padding: 3px;
+    width: 84%;
+    top: 40px;
+    text-align: center;
+    display: none;
+}
+
+#promo div img{
+    
+    -webkit-box-shadow: 4px 6px 5px 0px rgba(130,121,130,1);
+    -moz-box-shadow: 4px 6px 5px 0px rgba(130,121,130,1);
+    box-shadow: 4px 6px 5px 0px rgba(130,121,130,1);
+}
+
+#promo:hover div img{
+    filter: grayscale(1);
+    transition-property: filter;
+    transition-duration: 1s; 
+}
+
+#promo:hover #datos{
+    display: block;
+    transition-property: display;
+    transition-duration: 1s; 
+}
+
+#promo:hover{
+    cursor: pointer;
+}

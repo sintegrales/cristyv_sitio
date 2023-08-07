@@ -1,0 +1,128 @@
+<app-nav></app-nav>
+<hr>
+<section class="row">
+    <article class="col-lg-1"></article>
+    <article class="col-lg-5 card">
+        <h1>Categorías</h1>
+        <hr>
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-2">
+                <input type="button" id="boton" class="btn btn-warning" value="Insertar Categoría"  (click)="mostrarc(1)">
+            </div>
+        </div>
+        <div id="formc" *ngIf="verfc==true">
+            <div class="row">
+                <div class="col-lg-6">
+                    <input type="text" id="nombre" placeholder="Nombre categoría" class="form-control" [(ngModel)]="cat.nombre">
+                    <span id="errornc" class="error" *ngIf="validcnombre==false">Ingrese categoría</span>
+                </div>
+                <div class="col-lg-3">
+                    <input type="button" id="botong" value="Guardar" class="btn btn-warning" *ngIf="bceditar==false" (click)="ingresarc()">
+                    <input type="button" id="botong" value="Editar" class="btn btn-warning" *ngIf="bceditar==true" (click)="editarc()">
+                </div>
+                <div class="col-lg-3">
+                    <input type="button" value="Cancelar" class="btn btn-secondary" (click)="mostrarc(0)">
+                </div>
+                
+            </div>
+        </div>
+        <br>
+        <!-- <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10">
+                
+                <div class="input-group mb-3">
+                  <input type="text" class="form-control" placeholder="Buscar categoría" aria-label="Recipient's username" aria-describedby="basic-addon2" id="buscar" onkeyup="filtro()">
+                  <span class="input-group-text fas fa-search" id="basic-addon2"></span>
+                </div>
+            </div>
+            <div class="col-lg-1"></div>
+        </div> -->
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tr class="table-light text-center">
+                            <th>Nombre</th>
+                            <th>Acciones</th>
+                        </tr>
+                        <tbody id="tbodyu" class="table-group-divider">
+                            <tr *ngFor="let itemc of cate">
+                                <td>{{itemc.nombre}}</td>
+                                <td style="text-align: center;">
+                                    <a (click)="cargardatosc(itemc, itemc.id_cate)" class="accion">
+                                      <img src="../../../../assets/img/editar.png" title="Editar" width="20">  
+                                    </a>
+                                    &nbsp;&nbsp;
+                                    <a (click)="preguntac(itemc.id_cate, itemc.nombre)" class="accion">
+                                      <img src="../../../../assets/img/eliminar.png" title="Eliminar" width="20">
+                                    </a>
+                                </td>
+                              </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-1"></div>
+        </div>
+    </article>
+    <article class="col-lg-5 card">
+        <h1>Marcas</h1>
+        <hr>
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-2">
+                <input type="button" id="boton" class="btn btn-warning" value="Insertar Marca"  (click)="mostrarm(1)">
+            </div>
+        </div>
+        <div id="formm" *ngIf="verfm==true">
+            <div class="row">
+                <div class="col-lg-6">
+                    <input type="text" id="nombre" placeholder="Nombre Marca" class="form-control" [(ngModel)]="marc.nombre">
+                    <span id="errornm" class="error" *ngIf="validmnombre==false">Ingrese Marca</span>
+                </div>
+                <div class="col-lg-3">
+                    <input type="button" id="botong" value="Guardar" class="btn btn-warning" *ngIf="bmeditar==false" (click)="ingresarm()">
+                    <input type="button" id="botong" value="Editar" class="btn btn-warning" *ngIf="bmeditar==true" (click)="editarm()">
+                </div>
+                <div class="col-lg-3">
+                    <input type="button" value="Cancelar" class="btn btn-secondary" (click)="mostrarm(0)">
+                </div>
+                
+            </div>
+        </div>
+        <br>
+        
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <tr class="table-light text-center">
+                            <th>Nombre</th>
+                            <th>Acciones</th>
+                        </tr>
+                        <tbody id="tbodyu" class="table-group-divider">
+                            <tr *ngFor="let itemm of marca">
+                                <td>{{itemm.nombre}}</td>
+                                <td style="text-align: center;">
+                                    <a (click)="cargardatosm(itemm, itemm.id_marca)" class="accion">
+                                      <img src="../../../../assets/img/editar.png" title="Editar" width="20">  
+                                    </a>
+                                    &nbsp;&nbsp;
+                                    <a (click)="preguntam(itemm.id_marca, itemm.nombre)" class="accion">
+                                      <img src="../../../../assets/img/eliminar.png" title="Eliminar" width="20">
+                                    </a>
+                                </td>
+                              </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-lg-1"></div>
+        </div>
+    </article>
+    <article class="col-lg-1"></article>
+</section>

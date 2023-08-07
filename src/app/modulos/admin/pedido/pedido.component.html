@@ -1,0 +1,118 @@
+<app-nav></app-nav>
+<hr>
+<section>
+    <h1>Pedidos</h1>
+    <hr>
+    <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-2">
+            <input type="button" id="boton" class="btn btn-warning" value="Insertar Pedido" [routerLink]="['/pedidoins']">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="tpedido">
+                    <thead>
+                      <tr class="table-light text-center">
+                          <th>No. Pedido</th>
+                          <th>Fecha</th>
+                          <th>Cliente</th>
+                          <th>Dirección</th>
+                          <th>Subtotal</th>
+                          <th>Envio</th>
+                          <th>Total</th>
+                          <th>Cancelado</th>
+                          <th>Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tbodyu" class="table-group-divider">
+                      <tr *ngFor="let item of pedido">
+                        <td style="color: brown; font-weight: bold;" class="text-center">{{item.id_pedido}}</td>
+                        <td>{{item.fecha}}</td>
+                        <td>
+                            {{item.nombre}}<br>
+                            Celular: {{item.celular}}<br>
+                            {{item.email}}
+                        </td>
+                        <td>{{item.direccion}} <br>{{item.ciudad}} - {{item.dpto}}</td>
+                        <td>{{item.subtotal | currency}}</td>
+                        <td>{{item.envio | currency}}</td>
+                        <td>{{item.total | currency}}</td>
+                        <td>{{item.cancelado}}</td>
+                        <td style="text-align: center; font-size: 18px;">
+                            <a (click)="prod(item.id_pedido)" class="accion"  data-bs-toggle="modal" data-bs-target="#producto">
+                                <span class="fas fa-box-open" title="productos"></span>
+                            </a>
+                            &nbsp;&nbsp;
+                            <a (click)="pregunta(item.id_pedido, item.nombre)" class="accion">
+                              <span class="fas fa-window-close" style="color: brown;" title="cancelar"></span>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot class="table-group-divider">
+                      <tr class="table-light text-center">
+                        <th>Fecha</th>
+                        <th>Cliente</th>
+                        <th>Dirección</th>
+                        <th>Subtotal</th>
+                        <th>Envio</th>
+                        <th>Total</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </tfoot>
+                </table>
+                
+            </div>
+        </div>
+        <div class="col-lg-1"></div>
+    </div>
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="producto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Productos</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="tpedido">
+              <thead>
+                <tr class="table-light text-center">
+                    <th>Producto</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                </tr>
+              </thead>
+              <tbody id="tbodyu" class="table-group-divider">
+                <tr *ngFor="let itemp of productos">
+                  <td>{{itemp[1]}}</td>
+                  <td>{{itemp[3] | currency}}</td>
+                  <td>{{itemp[4]}}</td>
+                  <td>{{itemp[5] | currency}}</td>
+              </tr>
+              </tbody>
+              <tfoot class="table-group-divider">
+                <tr class="table-light text-center">
+                  <th>Producto</th>
+                  <th>Precio</th>
+                  <th>Cantidad</th>
+                  <th>Subtotal</th>
+                </tr>
+              </tfoot>
+          </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>

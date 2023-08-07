@@ -1,0 +1,35 @@
+<div id="carrito">
+    <a href="#" class="btn btn-success fas fa-shopping-cart" title="Carrito de compras">
+        <sup><span id="num">0</span></sup>
+    </a>
+</div>
+<app-snav></app-snav>
+<h3 class="text-center" id="catalogo">CATÁLOGO</h3>
+<hr>
+<div class="container">
+    <div id="buscar">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Escribe el producto a buscar" aria-label="Recipient's username" aria-describedby="button-addon2" [(ngModel)]="datofiltro" (keyup)="filtro()">
+            <button class="btn btn-outline-primary" type="button" id="button-addon2">Buscar</button>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-lg-2" *ngFor="let item of ultimos">
+        <div class="card" id="pro">
+            <div class="card-body">
+                <div id="datos">
+                   <span>Por solo: <br>{{item.precio | currency}}</span>
+                    <br>
+                    Pidelo ahora
+                </div>
+                <img src="https://cristyvariedades.com/php/producto{{item.img}}" width="100%" height="150"><hr id="p">
+                <h6>{{item.nombre}}</h6>
+                <b>Categoría: </b>{{item.cate}} <br>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>
+º

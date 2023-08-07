@@ -1,0 +1,85 @@
+<div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Ventas</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+            <li class="breadcrumb-item active">Ventas</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- fin titulos -->
+<!-- contenido -->
+<section class="content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-lg-6">
+                <button class="btn btn-primary" [routerLink]="['/ventains']">Insertar Venta</button>
+            </div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="search" class="form-control" placeholder="Buscar">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-default">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- <input type="text" (keyup)="filtro()" [(ngModel)]="datofiltro" placeholder="buscar" class="form-control">  -->
+                
+            </div>
+        </div>
+               
+       <hr>
+        
+        <!-- tabla de consulta -->
+        <div class="table-responsive p-0">
+            <table class="table table-hover text-nowrap">
+                <tr>
+                    <th>Fecha</th>
+                    <th>Cliente</th>
+                    <th>Productos</th>
+                    <th>Subtotal</th>
+                    <th>Impuesto</th>
+                    <th>Total</th>
+                    <th>Método de pago</th>
+                    <th>Acciones</th>
+                </tr>
+               <!--  //mostrarlos usuarios -->
+                <tr *ngFor="let item of vent">
+                    <td>{{item.fecha}}</td>
+                    <td>{{item.cliente}}</td>
+                    <td>---</td>
+                    <td>{{item.subtotal}}</td>
+                    <td>{{item.impuesto}}</td>
+                    <td>{{item.total}}</td>
+                    <td>{{item.metodo_pago}}</td>
+                    <td>
+                        <a>
+                            <span class="fas fa-edit editar" title="Editar" ></span>  
+                        </a>
+                        
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div style="text-align: center;" *ngIf="navegador==false">
+            <a class="link-primary" style="cursor: pointer;" (click)="refresh()"> Volver</a>
+        </div>
+        <div style="text-align: center;" *ngIf="navegador==true">
+            <span class="fas fa-angle-double-left" (click)="primerlimite()"></span> &nbsp;&nbsp;
+            <span class="fas fa-arrow-circle-left" (click)="bajarlimite()"></span>&nbsp;&nbsp;
+            <a class="link-primary" style="cursor: pointer;" *ngFor="let item of n" (click)="llegar(item)">{{item}} | </a>
+            Total de registros: {{totalreg}} &nbsp;&nbsp;
+            <span class="fas fa-arrow-circle-right" (click)="aumentarlimite()"></span> &nbsp;&nbsp;
+            <span class="fas fa-angle-double-right" (click)="finallimite()"></span> 
+        </div>
+
+    </div>
+</section>

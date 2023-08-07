@@ -1,0 +1,94 @@
+<app-nav></app-nav>
+<hr>
+<section>
+    <h1>Usuarios</h1>
+    <hr>
+    <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-2">
+            <input type="button" id="boton" class="btn btn-warning" value="Insertar Usuario" (click)="mostrar(1)">
+        </div>
+    </div>
+    <div id="form" *ngIf="verf==true">
+        <div class="row">
+            <div class="col-lg-1">
+                <input type="hidden" id="uid"> <input type="hidden" id="control" value="0">
+            </div>
+            <div class="col-lg-2">
+                <input type="text" id="nombre" placeholder="Nombre usuario" class="form-control" [(ngModel)]="user.nombre">
+                <span id="errorn" class="error" *ngIf="validnombre==false">Ingrese el nombre</span>
+            </div>
+            <div class="col-lg-2">
+                <input type="email" id="email" placeholder="Email" class="form-control" [(ngModel)]="user.email">
+                <span id="errore" class="error" *ngIf="validemail==false">Ingrese el email</span>
+            </div>
+            <div class="col-lg-2">
+                <input type="password" id="clave" placeholder="Contraseña" class="form-control" [(ngModel)]="user.clave">
+                <span id="errorc" class="error" *ngIf="validclave==false">Ingrese la contraseña</span>
+            </div>
+            <div class="col-lg-2">
+                <select id="rol" class="form-control form-select" [(ngModel)]="user.rol">
+                    <option value="" label="Seleccione rol">Seleccione rol</option>
+                    <option value="Administrador" label="Administrador">Administrador</option>
+                    <option value="Invitado" label="Invitado">Invitado</option>
+                </select>
+                <span id="errorr" class="error" *ngIf="validrol==false">Seleccione el rol</span>
+            </div>
+            <div class="col-lg-1">
+                <input type="button" id="botong" value="Guardar" class="btn btn-warning" *ngIf="beditar==false" (click)="ingresar()">
+                <input type="button" id="botong" value="Editar" class="btn btn-warning" *ngIf="beditar==true" (click)="editar()">
+            </div>
+            <div class="col-lg-1">
+                <input type="button" value="Cancelar" class="btn btn-secondary" (click)="mostrar(0)">
+            </div>
+            <div class="col-lg-1"></div>
+        </div>
+      </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="tusuario">
+                    <thead>
+                      <tr class="table-light text-center">
+                          <th>Nombre</th>
+                          <th>Email</th>
+                          <th>Contraseña</th>
+                          <th>Rol</th>
+                          <th>Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tbodyu" class="table-group-divider">
+                      <tr *ngFor="let item of usuario">
+                        <td>{{item.nombre}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.rol}}</td>
+                        <td>{{item.estado}}</td>
+                        <td style="text-align: center;">
+                            <a (click)="cargardatos(item, item.id_usuario)" class="accion">
+                              <img src="../../../../assets/img/editar.png" title="Editar" width="20">  
+                            </a>
+                            &nbsp;&nbsp;
+                            <a (click)="pregunta(item.id_usuario, item.nombre)" class="accion">
+                              <img src="../../../../assets/img/eliminar.png" title="Eliminar" width="20">
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot class="table-group-divider">
+                      <tr class="table-light text-center">
+                          <th>Nombre</th>
+                          <th>Email</th>
+                          <th>Contraseña</th>
+                          <th>Rol</th>
+                          <th>Acciones</th>
+                      </tr>
+                    </tfoot>
+                </table>
+                
+            </div>
+        </div>
+        <div class="col-lg-1"></div>
+    </div>
+</section>

@@ -1,0 +1,132 @@
+<app-nav></app-nav>
+<hr>
+<section>
+    <div class="row">
+        <div class="col-lg-11">
+            <h1>Crear Pedido</h1>
+        </div>
+        <div class="col-lg-1">
+            <button class="btn btn-primary" *ngIf="datoscli[3] != 0 && validprod==true" (click)="insertar()">Guardar</button>
+        </div>
+    </div>
+    <!-- <button class="btn btn-primary" (click)="borrarpro(1)">Borrar</button> -->
+    <hr>
+    <div class="row" id="ped">
+        <!-- <div class="col-lg-1"></div> -->
+        <div class="col-lg-3">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h4>Seleccionar cliente</h4>        
+                </div>
+                <div class="card-body">
+                    <input type="text" id="ccliente" placeholder="Datos del cliente" class="form-control" (keyup)="bcliente()" [(ngModel)]="ident">
+                    <hr>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tr class="table-light text-center">
+                                <th>Nombre</th>
+                                <th>Acciones</th>
+                            </tr>
+                            <tbody id="tbodyu" class="table-group-divider">
+                                <tr *ngFor="let itemc of cliente">
+                                    <td>{{itemc.nombre}}</td>
+                                    <td style="text-align: center;">
+                                        <a class="accion">
+                                          <span class="fas fa-check-square" style="color: green; font-size: 20px;" title="Seleccionar" (click)="scli(itemc.ident)"></span>  
+                                        </a>
+                                    </td>
+                                  </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h4>Seleccionar productos</h4>        
+                </div>
+                <div class="card-body">
+                    <input type="text" id="pproducto" placeholder="Código o Nombre producto" class="form-control" [(ngModel)]="datop" (keyup)="bproducto()">
+                    <hr>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tr class="table-light text-center">
+                                <th>Nombre</th>
+                                <th>Precio</th>
+                                <th>Acciones</th>
+                            </tr>
+                            <tbody id="tbodyu" class="table-group-divider">
+                                <tr *ngFor="let itemp of producto">
+                                    <td>{{itemp.nombre}}</td>
+                                    <td>{{itemp.precio | currency}}</td>
+                                    <td style="text-align: center;">
+                                        <a class="accion">
+                                          <span class="fas fa-check-square" style="color: green; font-size: 20px;" title="Seleccionar" (click)="selproducto(itemp.id_producto)" ></span>  
+                                        </a>
+                                    </td>
+                                  </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h4>Pedido</h4>        
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <b>Fecha: </b>
+                        </div>
+                        <div class="col-lg-10">
+                            {{fecha}} <input type="hidden" id="fecha" [(ngModel)]="fechaa"> 
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <b>Cliente:</b>
+                        </div>
+                        <div class="col-lg-10">
+                            <input type="hidden" id="fo_cliente" [(ngModel)]="datoscli[3]">
+                            {{datoscli[0]}}<br>
+                            {{datoscli[1]}}<br>
+                            {{datoscli[2]}}
+                        </div>
+                    </div>
+                    <div><b>Productos:</b></div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <tr class="table-light text-center">
+                                <th>Nombre</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
+                                <th>Subtotal</th>
+                                <th>Acciones</th>
+                            </tr>
+                            <tbody id="tbodyu" class="table-group-divider">
+                                <tr *ngFor="let itemsp of arrprod">
+                                    <td>{{itemsp[1]}}</td>
+                                    <td>{{itemsp[3] | currency}}</td>
+                                    <td>{{itemsp[4]}}</td>
+                                    <td>{{itemsp[5] | currency}}</td>
+                                    <td style="text-align: center;">
+                                        <a class="accion" (click)="borrarpro(itemsp[0])">
+                                          <span class="fas fa-backspace" style="color: brown; font-size: 20px;" title="Quitar" ></span>  
+                                        </a>
+                                    </td>
+                                  </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    TOTAL: {{total | currency}}
+                </div>
+            </div>
+        </div>
+        <!-- <div class="col-lg-1"></div> -->
+    </div>
+</section>

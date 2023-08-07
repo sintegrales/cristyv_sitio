@@ -1,0 +1,111 @@
+<!-- titulos -->
+<div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Usuarios</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+            <li class="breadcrumb-item active">Usuarios</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- fin titulos -->
+<!-- contenido -->
+<section class="content">
+    <div class="container-fluid">
+
+        <button class="btn btn-primary" (click)="mostrar(1)">Insertar Usuario</button><br><br>
+        <!-- formulario -->
+        <div id="formulario" *ngIf="verf==true">
+            <div class="row">
+                <div class="col-lg-6">
+                    <input type="text" id="nombre" class="form-control" [(ngModel)]="user.nombre"><br>
+                    <span style="color: red;" *ngIf="validnombre==false">Insertar Nombre</span>
+                </div>
+                <div class="col-lg-6">
+                    <input type="email" id="usuario" class="form-control" [(ngModel)]="user.email"><br>
+                    <span style="color: red;" *ngIf="validemail==false">Insertar Usuario</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <input type="password" id="clave" class="form-control" [(ngModel)]="user.clave"><br>
+                    <span style="color: red;" *ngIf="validclave==false">Inserta Contraseña</span>
+                </div>
+                <div class="col-lg-6">
+                    <select id="tipo" class="form-control form-select" [(ngModel)]="user.perfil">
+                        <option value="Administrador" label="Administrador">Administrador</option>
+                        <option value="Cajero" label="Cajero">Cajero</option>
+                        <option value="Invitado" label="Invitado">Invitado</option>
+                    </select><br>
+                    <span style="color: red;" *ngIf="validperfil==false">Elegir el tipo de usuario</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-3">
+                    <input type="button" value="Guardar" *ngIf="beditar==false" class="btn btn-primary" (click)="ingresar()" style="width: 100%;">
+                    <input type="button" value="Editar" *ngIf="beditar==true" class="btn btn-primary" (click)="editar()" style="width: 100%;">
+                </div>
+                <div class="col-lg-3">
+                    <input type="button" value="Cancelar" class="btn btn-secondary" (click)="mostrar(0)" style="width: 100%;">
+                </div>
+                <div class="col-lg-3"></div>
+            </div>
+        </div>
+
+        <br>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="search" class="form-control" placeholder="Buscar" (keyup)="filtro()" [(ngModel)]="datofiltro">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-default">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- <input type="text" (keyup)="filtro()" [(ngModel)]="datofiltro" placeholder="buscar" class="form-control">  -->
+                
+            </div>
+        </div>
+        
+
+        <br>
+        <!-- tabla de consulta -->
+        <div class="table-responsive p-0">
+            <table class="table table-hover text-nowrap">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Email</th>
+                    <th>Perfil</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+               <!--  //mostrarlos usuarios -->
+                <tr *ngFor="let item of usuario">
+                    <td>{{item.nombre}}</td>
+                    <td>{{item.email}}</td>
+                    <td>{{item.perfil}}</td>
+                    <td *ngIf="item.estado==1">Activo</td>
+                    <td *ngIf="item.estado!=1">Inactivo</td>
+                    <td>
+                        <a (click)="cargardatos(item, item.id_user)">
+                            <span class="fas fa-edit editar" title="Editar" ></span>  
+                        </a>
+                        
+                        <a (click)="pregunta(item.id_user, item.nombre)">
+                            <span class="fas fa-trash-alt eliminar" title="Eliminar" ></span>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+          </div>
+    </div>
+</section>
+

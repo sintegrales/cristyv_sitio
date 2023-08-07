@@ -1,0 +1,66 @@
+<div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Ingresar Ventas</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+            <li class="breadcrumb-item"><a [routerLink]="['/venta']">Ventas</a></li>
+            <li class="breadcrumb-item active">Ingresar Ventas</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- fin titulos -->
+<!-- formulario -->
+<div id="formulariob">
+  <div class="input-group">
+    <input type="search" class="form-control" placeholder="Ingrese Código o Nombre del producto">
+    <div class="input-group-append">
+        <button type="button" class="btn btn-default">
+            <i class="fa fa-search"></i>
+        </button>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div id="productos" class="col-lg-6">
+    <div class="table-responsive p-0">
+      <table id="tproducto" class="table table-hover text-nowrap">
+          <tr>
+              <th>Código</th>
+              <th>Nombre</th>
+              <th>Stock</th>
+              <th>Precio Venta</th>
+              <th>Acciones</th>
+          </tr>
+         <!--  //mostrarlos usuarios -->
+          <tr *ngFor="let item of product">
+              <td>{{item.codigo}}</td>
+              <td>{{item.nombre}}</td>
+              <td>{{item.stock}}</td>
+              <td>{{item.precio_venta}}</td>
+              <td>
+                  <a>
+                      <span class="fas fa-edit editar" title="Seleccionar" (click)="capturar(item)"></span>  
+                  </a>
+              </td>
+          </tr>
+      </table>
+    </div>
+    <!-- navegador -->
+    <div style="text-align: center;">
+        <span class="fas fa-angle-double-left" (click)="primerlimite()"></span> &nbsp;&nbsp;
+        <span class="fas fa-arrow-circle-left" (click)="bajarlimite()"></span>&nbsp;&nbsp;
+        
+        <span class="fas fa-arrow-circle-right" (click)="aumentarlimite()"></span> &nbsp;&nbsp;
+        <span class="fas fa-angle-double-right" (click)="finallimite()"></span> 
+    </div>
+  </div>
+</div>
+
+

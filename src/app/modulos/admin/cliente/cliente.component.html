@@ -1,0 +1,119 @@
+<app-nav></app-nav>
+<hr>
+<section>
+    <h1>Clientes</h1>
+    <hr>
+    <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-2">
+            <input type="button" id="boton" class="btn btn-warning" value="Insertar Cliente" (click)="mostrar(1)">
+        </div>
+    </div>
+    <div id="form" *ngIf="verf==true">
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-2">
+                <input type="text" id="ident" placeholder="No. Identificación" class="form-control" [(ngModel)]="cli.ident">
+                <span id="errori" class="error" *ngIf="validident==false">Ingrese No. de Identificación</span>
+            </div>
+            <div class="col-lg-2">
+                <input type="text" id="nombre" placeholder="Nombre cliente" class="form-control" [(ngModel)]="cli.nombre">
+                <span id="errorn" class="error" *ngIf="validnombre==false">Ingrese el nombre</span>
+            </div>
+            <div class="col-lg-2">
+                <input type="email" id="email" placeholder="Email" class="form-control" [(ngModel)]="cli.email">
+                <span id="errore" class="error" *ngIf="validemail==false">Ingrese el email</span>
+            </div>
+            <div class="col-lg-3">
+                <input type="text" id="direccion" placeholder="Dirección" class="form-control" [(ngModel)]="cli.direccion">
+                <span id="errord" class="error" *ngIf="validdireccion==false">Ingrese la dirección</span>
+            </div>
+            <div class="col-lg-1"></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-3">
+                <input type="tel" id="celular" placeholder="Celular" class="form-control" [(ngModel)]="cli.celular">
+                <span id="errorc" class="error" *ngIf="validcelular==false">Ingrese No. celular</span>
+            </div>
+            <div class="col-lg-3">
+                <select id="iddpto" class="form-control form-select"  [(ngModel)]="cli.iddpto" (change)="cciudad()">
+                    <option *ngFor="let itemd of dpto" value="{{itemd.id_dpto}}" label="{{itemd.nombre}}">{{itemd.nombre}}</option>
+                </select>
+                <span id="errordp" class="error" *ngIf="validdpto==false">Escoja departamento</span>
+            </div>
+            <div class="col-lg-3">
+                <select *ngIf="cli.iddpto!=0" id="fo_ciudad" class="form-control form-select"  [(ngModel)]="cli.fo_ciudad">
+                    <option *ngFor="let itemc of ciudad" value="{{itemc.id_ciudad}}" label="{{itemc.nombre}}">{{itemc.nombre}}</option>
+                </select>
+                <span id="errorci" class="error" *ngIf="validciudad==false">Escoja ciudad</span>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-4">
+                <input type="button" id="botong" value="Guardar" class="btn btn-warning" *ngIf="beditar==false" (click)="ingresar()">
+                <input type="button" id="botong" value="Editar" class="btn btn-warning" *ngIf="beditar==true" (click)="editar()">
+            </div>
+            <div class="col-lg-4">
+                <input type="button" value="Cancelar" class="btn btn-secondary" (click)="mostrar(0)" style="width: 100%;">
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+      </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="tusuario">
+                    <thead>
+                      <tr class="table-light text-center">
+                          <th>Identificación</th>
+                          <th>Nombre</th>
+                          <th>Email</th>
+                          <th>Celular</th>
+                          <th>Dirección</th>
+                          <th>Ciudad</th>
+                          <th>Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tbodyu" class="table-group-divider">
+                      <tr *ngFor="let item of cliente">
+                        <td>{{item.ident}}</td>
+                        <td>{{item.nombre}}</td>
+                        <td>{{item.email}}</td>
+                        <td>{{item.celular}}</td>
+                        <td>{{item.direccion}}</td>
+                        <td>{{item.ciudad}} - <span style="text-transform: capitalize;">{{item.dpto}}</span></td>
+                        <td style="text-align: center;">
+                            <a (click)="cargardatos(item, item.id_cliente)" class="accion">
+                              <img src="../../../../assets/img/editar.png" title="Editar" width="20">  
+                            </a>
+                            &nbsp;&nbsp;
+                            <a (click)="pregunta(item.id_cliente, item.nombre)" class="accion">
+                              <img src="../../../../assets/img/eliminar.png" title="Eliminar" width="20">
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot class="table-group-divider">
+                      <tr class="table-light text-center">
+                        <th>Identificación</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Celular</th>
+                        <th>Dirección</th>
+                        <th>Ciudad</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </tfoot>
+                </table>
+                
+            </div>
+        </div>
+        <div class="col-lg-1"></div>
+    </div>
+</section>
+

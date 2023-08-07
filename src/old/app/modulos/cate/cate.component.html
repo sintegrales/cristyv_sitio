@@ -1,0 +1,94 @@
+<div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Categorías</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+            <li class="breadcrumb-item active">Categorías</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- fin titulos -->
+<!-- contenido -->
+<section class="content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-lg-6">
+                <button class="btn btn-primary" (click)="mostrar(1)">Insertar Categoría</button>
+            </div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="search" class="form-control" placeholder="Buscar" (keyup)="filtro()" [(ngModel)]="datofiltro">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-default">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- <input type="text" (keyup)="filtro()" [(ngModel)]="datofiltro" placeholder="buscar" class="form-control">  -->
+                
+            </div>
+        </div>
+        <!-- formulario -->
+        <div id="formulario" *ngIf="verf==true">
+            <div class="row">
+                <div class="col-lg-4">
+                    <input type="text" id="nombre" class="form-control" [(ngModel)]="cate.categoria"><br>
+                    <span style="color: red;" *ngIf="validcate==false">Insertar Nombre</span>
+                </div>
+                <div class="col-lg-4">
+                    <input type="button" value="Guardar" *ngIf="beditar==false" class="btn btn-primary" (click)="ingresar()" style="width: 100%;">
+                    <input type="button" value="Editar" *ngIf="beditar==true" class="btn btn-primary" (click)="editar()" style="width: 100%;">
+                </div>
+                <div class="col-lg-4">
+                    <input type="button" value="Cancelar" class="btn btn-secondary" (click)="mostrar(0)" style="width: 100%;">
+                </div>
+            </div>
+            
+        </div>
+
+       
+       <hr>
+        
+        <!-- tabla de consulta -->
+        <div class="table-responsive p-0">
+            <table class="table table-hover text-nowrap">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+               <!--  //mostrarlos usuarios -->
+                <tr *ngFor="let item of catego">
+                    <td>{{item.categoria}}</td>
+                    <td>
+                        <a (click)="cargardatos(item, item.id_cate)">
+                            <span class="fas fa-edit editar" title="Editar" ></span>  
+                        </a>
+                        
+                        <a (click)="pregunta(item.id_cate, item.categoria)">
+                            <span class="fas fa-trash-alt eliminar" title="Eliminar" ></span>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div style="text-align: center;" *ngIf="navegador==false">
+            <a class="link-primary" style="cursor: pointer;" (click)="refresh()"> Volver</a>
+        </div>
+        <div style="text-align: center;" *ngIf="navegador==true">
+            <span class="fas fa-angle-double-left" (click)="primerlimite()"></span> &nbsp;&nbsp;
+            <span class="fas fa-arrow-circle-left" (click)="bajarlimite()"></span>&nbsp;&nbsp;
+            <a class="link-primary" style="cursor: pointer;" *ngFor="let item of n" (click)="llegar(item)">{{item}} | </a>
+            Total de registros: {{totalreg}} &nbsp;&nbsp;
+            <span class="fas fa-arrow-circle-right" (click)="aumentarlimite()"></span> &nbsp;&nbsp;
+            <span class="fas fa-angle-double-right" (click)="finallimite()"></span> 
+        </div>
+
+    </div>
+</section>

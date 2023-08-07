@@ -1,0 +1,168 @@
+<app-nav></app-nav>
+<hr>
+<section>
+    <h1>Productos</h1>
+    <hr>
+    <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-2">
+            <input type="button" id="boton" class="btn btn-warning" value="Insertar producto" (click)="mostrar(1)">
+        </div>
+    </div>
+    <div id="form" *ngIf="verf==true">
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-3">
+                <input type="text" id="codigo" placeholder="Código del producto" class="form-control" [(ngModel)]="prod.codigo">
+                <span id="errorc" class="error" *ngIf="validcodigo==false">Ingrese el código</span>
+
+                <input type="text" id="nombre" placeholder="Nombre del producto" class="form-control" [(ngModel)]="prod.nombre">
+                <span id="errorn" class="error" *ngIf="validnombre==false">Ingrese el nombre el producto</span>
+
+                <select id="fo_cate" class="form-control form-select" [(ngModel)]="prod.fo_cate">
+                    <option value="" label="Seleccione Categoría" selected="selected">Seleccione Categoría</option>
+                    <option *ngFor="let itemc of cate" value="{{itemc.id_cate}}" label="{{itemc.nombre}}">{{itemc.nombre}}</option>
+                </select>
+                <span id="errorfc" class="error" *ngIf="validcate==false">Seleccione la categoría</span>
+
+                <select id="fo_marca" class="form-control form-select" [(ngModel)]="prod.fo_marca">
+                    <option value="" label="Seleccione Marca" selected="selected">Seleccione Marca</option>
+                    <option *ngFor="let itemm of marca" value="{{itemm.id_marca}}" label="{{itemm.nombre}}">{{itemm.nombre}}</option>
+                </select>
+                <span id="errorfm" class="error" *ngIf="validmarca==false">Seleccione la marca</span>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="lprecio">$</span>
+                    <input type="number" id="precio" class="form-control" placeholder="Precio producto" aria-label="Amount (to the nearest dollar)" [(ngModel)]="prod.precio">
+                    <span class="input-group-text" id="lprecio">.00</span>
+                </div>
+                <span id="errorp" class="error" *ngIf="validprecio==false">Ingrese el precio</span>
+
+            </div>
+            <div class="col-lg-4">
+                <label>Promoción:</label>&nbsp;&nbsp;&nbsp;
+                <label>NO &nbsp;</label>
+                <input type="radio" id="promo" name="promo" checked="checked" value="NO" [(ngModel)]="prod.promo">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <label> SI &nbsp;</label>
+                <input type="radio" id="promo" name="promo" value="SI" [(ngModel)]="prod.promo">
+                <textarea id="descripcion" class="form-control" cols="30" rows="8" placeholder="Descripción" [(ngModel)]="prod.descripcion"></textarea>
+                <span id="errord" class="error" *ngIf="validdescri==false">Ingrese la descripción</span>
+            </div>
+            <div class="col-lg-2">
+                <input type="button" id="botong" value="Guardar" class="btn btn-warning" *ngIf="beditar==false" (click)="ingresar()">
+                <input type="button" id="botong" value="Editar" class="btn btn-warning" *ngIf="beditar==true" (click)="editar()">
+                <input type="button" id="botong" value="Cancelar" class="btn btn-secondary" (click)="mostrar(0)">
+            </div>
+            <div class="col-lg-1"></div>
+        </div>
+      </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-1"></div>
+        <div class="col-lg-10">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="tusuario">
+                    <thead>
+                      <tr class="table-light text-center">
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Categoría</th>
+                        <th>Marca</th>
+                        <th>Precio</th>
+                        <th>Descripción</th>
+                        <th>Promoción</th>
+                        <th>Imágenes</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tbodyu" class="table-group-divider">
+                      <tr *ngFor="let item of producto">
+                        <td>{{item.codigo}}</td>
+                        <td>{{item.nombre}}</td>
+                        <td>{{item.categoria}}</td>
+                        <td>{{item.marca}}</td>
+                        <td>{{item.precio | currency}}</td>
+                        <td>{{item.descripcion}}</td>
+                        <td>{{item.promo}}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary fas fa-eye" title="Ver Imágenes" data-bs-toggle="modal" data-bs-target="#gal" (click)="verimg(item.id_producto)"></button>
+                            &nbsp;&nbsp;
+                            <button type="button" title="Subir imagen" class="btn btn-secondary fas fa-upload" data-bs-toggle="modal" data-bs-target="#subirimg" (click)="cargarurl(item.id_producto)"></button>
+                        </td>
+                        <td style="text-align: center;">
+                            <a (click)="cargardatos(item, item.id_producto)" class="accion">
+                              <img src="../../../../assets/img/editar.png" title="Editar" width="20">  
+                            </a>
+                            &nbsp;&nbsp;
+                            <a (click)="pregunta(item.id_producto, item.nombre)" class="accion">
+                              <img src="../../../../assets/img/eliminar.png" title="Eliminar" width="20">
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                    <tfoot class="table-group-divider">
+                      <tr class="table-light text-center">
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Categoría</th>
+                        <th>Marca</th>
+                        <th>Precio</th>
+                        <th>Descripción</th>
+                        <th>Imágenes</th>
+                        <th>Acciones</th>
+                      </tr>
+                    </tfoot>
+                </table>
+                
+            </div>
+        </div>
+        <div class="col-lg-1"></div>
+    </div>
+</section>
+
+<!-- Modal subir imagen -->
+<!-- Modal -->
+<div class="modal fade" id="subirimg" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">SUBIR IMÁGEN</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div id="body">
+        <div class="modal-body">
+          <iframe [src]="urlframe" width="100%" height="300" frameborder="0"></iframe>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
+          <!-- <button type="submit" class="btn btn-primary">SUBIR</button> -->
+        </div>
+    </div>
+      </div>
+    </div>
+</div>
+<!-- -------------- -->
+<div class="modal fade" id="gal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">IMÁGENES</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="subir">
+        <div class="modal-body">
+            <!-- Galeria -->
+            <div id="galeria" class="parent-container">
+              <!-- <span *ngFor="let itemi of img">{{itemi}}</span> -->
+              <img *ngFor="let itemi of img" src="https://cristyvariedades.com/cristyv/producto/{{itemi}}" width="20%" style="float: left; margin-right: 5px;" alt="">
+            </div>
+        </div>
+        <div class="modal-footer" style="clear:both;">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">CERRAR</button>
+          <button type="submit" class="btn btn-primary">SUBIR</button>
+        </div>
+        </form>
+      </div>
+    </div>
+</div>

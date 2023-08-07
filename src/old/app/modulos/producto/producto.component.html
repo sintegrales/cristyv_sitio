@@ -1,0 +1,133 @@
+<div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1 class="m-0">Productos</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+            <li class="breadcrumb-item active">Productos</li>
+          </ol>
+        </div><!-- /.col -->
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- fin titulos -->
+<!-- contenido -->
+<section class="content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-lg-6">
+                <button class="btn btn-primary" (click)="mostrar(1)">Insertar Producto</button>
+            </div>
+            <div class="col-lg-4">
+                <div class="input-group">
+                    <input type="search" class="form-control" placeholder="Buscar" (keyup)="filtro()" [(ngModel)]="datofiltro">
+                    <div class="input-group-append">
+                        <button type="button" class="btn btn-default">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- <input type="text" (keyup)="filtro()" [(ngModel)]="datofiltro" placeholder="buscar" class="form-control">  -->
+                
+            </div>
+        </div>
+        <!-- formulario -->
+        <div id="formulario" *ngIf="verf==true">
+            <hr>
+            <div class="row">
+                <div class="col-lg-4">
+                    <select id="cate" class="form-control form-select" [(ngModel)]="producto.id_categoria">
+                        <option value="0" label="Escoger Categoría">Escoger Categoría</option>
+                        <option *ngFor="let itemc of cate" value="{{itemc.id_cate}}" label="{{itemc.categoria}}">{{itemc.categoria}}</option>
+                    </select>
+                    <span style="color: red;" *ngIf="validnombre==false">Escoger categoría</span>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" id="codigo" class="form-control" [(ngModel)]="producto.codigo" placeholder="Código del producto">
+                    <span style="color: red;" *ngIf="validcodigo==false">Insertar Código</span>
+                </div>
+                <div class="col-lg-4">
+                    <input type="text" id="nombre" class="form-control" [(ngModel)]="producto.nombre" placeholder="Nombre del producto">
+                    <span style="color: red;" *ngIf="validnombre==false">Insertar Nombre</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <input type="number" id="compra" class="form-control" [(ngModel)]="producto.precio_compra" placeholder="Precio de compra">
+                    <span style="color: red;" *ngIf="validcompra==false">Ingresar precio compra</span>
+                </div>
+                <div class="col-lg-4">
+                    <input type="number" id="venta" class="form-control" [(ngModel)]="producto.precio_venta" placeholder="Precio de venta">
+                    <span style="color: red;" *ngIf="validcodigo==false">Insertar precio Venta</span>
+                </div>
+                <div class="col-lg-4">
+                    <input type="button" value="Guardar" *ngIf="beditar==false" class="btn btn-primary" (click)="ingresar()" style="width: 100%;">
+                    <input type="button" value="Editar" *ngIf="beditar==true" class="btn btn-primary" (click)="editar()" style="width: 100%;">
+                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+                    <textarea id="descripcion" cols="30" rows="2" class="form-control" [(ngModel)]="producto.descripcion" placeholder="Descripción"></textarea>
+                </div>
+                <div class="col-lg-4">
+                    <input type="button" value="Cancelar" class="btn btn-secondary" (click)="mostrar(0)" style="width: 100%;">
+                </div>
+            </div>
+            
+        </div>
+
+       
+       <hr>
+        
+        <!-- tabla de consulta -->
+        <div class="table-responsive p-0">
+            <table class="table table-hover text-nowrap">
+                <tr>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Categoría</th>
+                    <th>Stock</th>
+                    <th>Precio Compra</th>
+                    <th>Precio Venta</th>
+                    <th>Acciones</th>
+                </tr>
+               <!--  //mostrarlos usuarios -->
+                <tr *ngFor="let item of prod">
+                    <td>{{item.codigo}}</td>
+                    <td>{{item.nombre}}</td>
+                    <td>{{item.categoria}}</td>
+                    <td>{{item.stock}}</td>
+                    <td>{{item.precio_compra}}</td>
+                    <td>{{item.precio_venta}}</td>
+                    <td>
+                        <a (click)="cargardatos(item, item.id)">
+                            <span class="fas fa-edit editar" title="Editar" ></span>  
+                        </a>
+                        
+                        <a (click)="pregunta(item.id, item.nombre)">
+                            <span class="fas fa-trash-alt eliminar" title="Eliminar" ></span>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!-- paginación -->
+        <div style="text-align: center;" *ngIf="navegador==false">
+            <a class="link-primary" style="cursor: pointer;" (click)="refresh()"> Volver</a>
+        </div>
+        <div style="text-align: center;" *ngIf="navegador==true">
+            <span class="fas fa-angle-double-left" (click)="primerlimite()"></span> &nbsp;&nbsp;
+            <span class="fas fa-arrow-circle-left" (click)="bajarlimite()"></span>&nbsp;&nbsp;
+            <a class="link-primary" style="cursor: pointer;" *ngFor="let item of n" (click)="llegar(item)">{{item}} | </a>
+            Total de registros: {{totalreg}} &nbsp;&nbsp;
+            <span class="fas fa-arrow-circle-right" (click)="aumentarlimite()"></span> &nbsp;&nbsp;
+            <span class="fas fa-angle-double-right" (click)="finallimite()"></span> 
+        </div>
+
+    </div>
+</section>

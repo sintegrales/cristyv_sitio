@@ -1,0 +1,42 @@
+<div class="login-page" id="body">
+    <div class="login-box">
+    
+    <!-- /.login-logo -->
+    <div id="login">
+      <div class="login-logo">
+        <a href="#">
+          <img src="./assets/img/logo.png" width="50%">
+        </a>
+      </div>
+      <!-- formulario -->
+      <div id="form">
+        <div class="input-group mb-3">
+          <input type="email" class="form-control" placeholder="Email" [(ngModel)]="email">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-envelope"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control" placeholder="Contraseña" [(ngModel)]="clave" (keypress)="consulta($event)">
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+         <!-- /.col -->
+          <div class="col-12">
+            <span style="color:#ff557f;" *ngIf="error==true">Email o contraseña incorrecta</span><br>
+            
+            <input type="button" value="Ingresar" class="btn btn-secondary btn-block" value="INICIAR SESIÓN" (click)="consulta('')">
+          </div>
+          <!-- /.col -->
+        </div>
+      </div>
+    </div>
+    
+    </div>
+</div>

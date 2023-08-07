@@ -1,0 +1,21 @@
+<h3 class="text-center">NUEVOS ARTÍCULOS</h3>
+
+<div class="row">
+    <div class="col-lg-2" *ngFor="let item of ultimos">
+        <div class="card" id="pro">
+            <div class="card-body">
+                <div id="datos">
+                   <span>Por solo: <br>{{item.precio | currency}}</span>
+                    <br>
+                    Pidelo ahora
+                </div>
+                <img src="https://cristyvariedades.com/php/producto{{item.img}}" width="100%"><hr id="p">
+                <h6>{{item.nombre}}</h6>
+                <b>Marca: </b>{{item.marca}} <br>
+                <b>Categoría: </b>{{item.cate}} <br>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
